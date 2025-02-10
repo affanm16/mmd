@@ -1,0 +1,20 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import DBSCAN
+from sklearn.datasets import make_moons
+
+# Generate synthetic dataset
+X, _ = make_moons(n_samples=300, noise=0.1, random_state=42)
+
+# Apply DBSCAN clustering
+dbscan = DBSCAN(eps=0.2, min_samples=5)
+labels = dbscan.fit_predict(X)
+
+# Plot the clusters
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', edgecolors='k', s=100)
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.title("DBSCAN Clustering on Moon-Shaped Data")
+plt.colorbar(label="Cluster Label")
+plt.show()
